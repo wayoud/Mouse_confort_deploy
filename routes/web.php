@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\OrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,5 +19,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
-
+Route::get('/order/create', [OrderController::class, 'create'])->name('orders.create');
+Route::post('/order', [OrderController::class, 'store'])->name('orders.store');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Routes to update status
+Route::post('/orders/{id}/traite', [OrderController::class, 'updateStatusToTraite'])->name('orders.traite');
+Route::post('/orders/{id}/canceled', [OrderController::class, 'updateStatusToCanceled'])->name('orders.canceled');
