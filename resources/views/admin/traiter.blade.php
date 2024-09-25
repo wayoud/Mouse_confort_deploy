@@ -41,7 +41,7 @@
                     @endif
 
                     <!-- Orders List -->
-                    <h4 class="text-center mb-4">Orders List</h4>
+                    <h4 class="text-center mb-4">les Demandes Traité</h4>
 
                     <div class="table-responsive mt-3">
                         <table class="table table-bordered table-striped table-hover align-middle">
@@ -54,7 +54,7 @@
                                     <th>Phone</th>
                                     <th>Email</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,20 +75,7 @@
                                             {{ ucfirst($order->status) }}
                                         </span>
                                     </td>
-                                    <td>
-                                        @if($order->status === 'pending')
-                                        <div class="action-buttons">
-                                            <form action="{{ route('orders.traite', $order->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-success">Accepter</button>
-                                            </form>
-                                            <form action="{{ route('orders.canceled', $order->id) }}" method="POST">
-                                                @csrf
-                                                <button type="submit" class="btn btn-sm btn-danger">Annulée</button>
-                                            </form>
-                                        </div>
-                                        @endif
-                                    </td>
+
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -101,29 +88,3 @@
 </div>
 @endsection
 
-@section('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const traitButtons = document.querySelectorAll('.trait-btn');
-        const annulButtons = document.querySelectorAll('.annul-btn');
-
-        traitButtons.forEach((button) => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const form = this.closest('form');
-                this.closest('.action-buttons').style.display = 'none';
-                form.submit();
-            });
-        });
-
-        annulButtons.forEach((button) => {
-            button.addEventListener('click', function(e) {
-                e.preventDefault();
-                const form = this.closest('form');
-                this.closest('.action-buttons').style.display = 'none';
-                form.submit();
-            });
-        });
-    });
-</script>
-@endsection

@@ -41,7 +41,7 @@
                     @endif
 
                     <!-- Orders List -->
-                    <h4 class="text-center mb-4">Orders List</h4>
+                    <h4 class="text-center mb-4">Les Demandes accepté</h4>
 
                     <div class="table-responsive mt-3">
                         <table class="table table-bordered table-striped table-hover align-middle">
@@ -55,6 +55,7 @@
                                     <th>Email</th>
                                     <th>Status</th>
                                     <th>Action</th>
+
                                 </tr>
                             </thead>
                             <tbody>
@@ -76,20 +77,24 @@
                                         </span>
                                     </td>
                                     <td>
-                                        @if($order->status === 'pending')
+
+
                                         <div class="action-buttons">
-                                            <form action="{{ route('orders.traite', $order->id) }}" method="POST">
+                                            <form action="{{ route('orders.traiteAccepted', $order->id) }}" method="POST">
                                                 @csrf
-                                                <button type="submit" class="btn btn-sm btn-success">Accepter</button>
+                                                <button type="submit" class="btn btn-sm btn-success">Traité</button>
                                             </form>
                                             <form action="{{ route('orders.canceled', $order->id) }}" method="POST">
                                                 @csrf
                                                 <button type="submit" class="btn btn-sm btn-danger">Annulée</button>
                                             </form>
                                         </div>
-                                        @endif
+
+
                                     </td>
+
                                 </tr>
+
                                 @endforeach
                             </tbody>
                         </table>

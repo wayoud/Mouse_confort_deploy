@@ -36,6 +36,15 @@ class OrderController extends Controller
     public function updateStatusToTraite($id)
     {
         $order = Order::findOrFail($id);
+        $order->status = 'Accepted';
+        $order->save();
+
+        return redirect()->back()->with('status', 'Order status updated to traité.');
+    }
+
+    public function updateStatusToTraiteAcepted($id)
+    {
+        $order = Order::findOrFail($id);
         $order->status = 'traité';
         $order->save();
 
